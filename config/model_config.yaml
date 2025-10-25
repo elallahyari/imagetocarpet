@@ -1,0 +1,80 @@
+# -----------------------------------------------------------------------------
+# تنظیمات مدل‌های هوش مصنوعی
+# -----------------------------------------------------------------------------
+models:
+  # دستگاه پردازشی: auto (انتخاب خودکار cuda یا cpu), cuda, cpu
+  device: "auto"
+
+# -----------------------------------------------------------------------------
+# پروفایل‌های مدل‌های هوش مصنوعی
+# -----------------------------------------------------------------------------
+model_profiles:
+  - name: "Stable Diffusion 1.5 (استاندارد)"
+    base_model: "runwayml/stable-diffusion-v1-5"
+    controlnets:
+      - name: "Lineart (خطی)"
+        path: "lllyasviel/control_v11p_sd15_lineart"
+      - name: "SoftEdge (لبه نرم)"
+        path: "lllyasviel/control_v11p_sd15_softedge"
+      - name: "Tile (بازسازی جزئیات)"
+        path: "lllyasviel/control_v11f1e_sd15_tile"
+
+  - name: "Stable Diffusion XL (کیفیت بالا)"
+    base_model: "stabilityai/stable-diffusion-xl-base-1.0"
+    controlnets:
+      - name: "Canny (تشخیص لبه)"
+        path: "diffusers/controlnet-canny-sdxl-1.0"
+      - name: "Depth (عمق)"
+        path: "diffusers/controlnet-depth-sdxl-1.0"
+
+# -----------------------------------------------------------------------------
+# تنظیمات مراحل پردازش تصویر
+# -----------------------------------------------------------------------------
+processing:
+  edge_detection:
+    method: "HED"
+    canny_low: 50
+    canny_high: 150
+  
+  color_quantization:
+    n_colors: 10
+    method: "kmeans"
+  
+  symmetry:
+    enable: true
+
+# -----------------------------------------------------------------------------
+# تنظیمات مرحله تولید طرح با هوش مصنوعی
+# -----------------------------------------------------------------------------
+generation:
+  prompts:
+    positive: |
+      masterpiece, best quality, high quality,
+      Persian carpet design, traditional ornamental pattern,
+      Isfahan style, symmetrical floral motifs, 
+      flat colors, vector art, 2D design,
+      no shadows, no gradients, clean lines,
+      decorative border, intricate details,
+      textile art, carpet weaving design,
+      medallion center, corner spandrels,
+      arabesques, palmettes, rosettes
+    
+    negative: |
+      photograph, 3D render, realistic, noisy, blurry,
+      shadows, gradients, depth, perspective,
+      modern, minimalist, abstract, chaotic,
+      watercolor, sketch, unfinished, ugly, deformed
+
+  steps: 30
+  guidance_scale: 7.5
+  controlnet_scale: 0.8
+  seed: -1
+
+# -----------------------------------------------------------------------------
+# تنظیمات فایل‌های خروجی
+# -----------------------------------------------------------------------------
+output:
+  resolution: 2048
+  dpi: 300
+  save_intermediate: true
+  medallion_background_color: [245, 240, 230]

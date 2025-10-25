@@ -1,0 +1,24 @@
+{
+    "carpet_width": 200,
+    "carpet_height": 300,
+    "shaneh": 40,
+    "tar": 40,
+    "remove_bg": false,
+    "edge_detect": true,
+    "ai_generate": false,
+    "symmetry": true,
+    "quantize": true,
+    "vectorize": true,
+    "is_full_design": true,
+    "controlnet_scale": 0.8,
+    "steps": 30,
+    "guidance": 7.5,
+    "controlnet_model": "lllyasviel/control_v11p_sd15_lineart",
+    "edge_method": "HED",
+    "sam_fast_mode": false,
+    "save_intermediate": true,
+    "palette_method": "custom",
+    "n_colors": 5,
+    "custom_palette": [
+        [
+            
